@@ -470,8 +470,8 @@ def add_selectable(*, label: str ='', user_data: Any ='', use_internal_label: bo
 	"""Adds a selectable. Similar to a button but can indicate its selected state."""
 	...
 
-def add_separator(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', show: bool ='', pos: Union[List[int], Tuple[int, ...]] ='', text: str ='') -> Union[int, str]:
-	"""Adds a horizontal line separator."""
+def add_separator(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', show: bool ='', pos: Union[List[int], Tuple[int, ...]] ='') -> Union[int, str]:
+	"""Adds a horizontal line separator. Use 'label' parameter to add text and mvStyleVar_SeparatorText* elements to style it."""
 	...
 
 def add_series_value(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', source: Union[int, str] ='', default_value: Any ='', parent: Union[int, str] ='') -> Union[int, str]:
@@ -848,6 +848,10 @@ def get_drawing_mouse_pos() -> Union[List[int], Tuple[int, ...]]:
 
 def get_file_dialog_info(file_dialog : Union[int, str]) -> dict:
 	"""Returns information related to the file dialog. Typically used while the file dialog is in use to query data about the state or info related to the file dialog."""
+	...
+
+def get_focused_item() -> Union[int, str]:
+	"""Returns the item currently having focus."""
 	...
 
 def get_frame_count() -> int:
@@ -1362,6 +1366,45 @@ mvKey_ModSuper=0
 mvKey_ModShift=0
 mvKey_ModAlt=0
 mvKey_ModCtrl=0
+mvKey_Prior=0
+mvKey_Next=0
+mvKey_Select=0
+mvKey_Execute=0
+mvKey_LWin=0
+mvKey_RWin=0
+mvKey_Apps=0
+mvKey_Sleep=0
+mvKey_Clear=0
+mvKey_Prior=0
+mvKey_Next=0
+mvKey_Select=0
+mvKey_Execute=0
+mvKey_Help=0
+mvKey_LWin=0
+mvKey_RWin=0
+mvKey_Apps=0
+mvKey_Sleep=0
+mvKey_F25=0
+mvKey_Browser_Refresh=0
+mvKey_Browser_Stop=0
+mvKey_Browser_Search=0
+mvKey_Browser_Favorites=0
+mvKey_Browser_Home=0
+mvKey_Volume_Mute=0
+mvKey_Volume_Down=0
+mvKey_Volume_Up=0
+mvKey_Media_Next_Track=0
+mvKey_Media_Prev_Track=0
+mvKey_Media_Stop=0
+mvKey_Media_Play_Pause=0
+mvKey_Launch_Mail=0
+mvKey_Launch_Media_Select=0
+mvKey_Launch_App1=0
+mvKey_Launch_App2=0
+mvKey_Colon=0
+mvKey_Plus=0
+mvKey_Tilde=0
+mvKey_Quote=0
 mvAll=0
 mvTool_About=0
 mvTool_Debug=0
