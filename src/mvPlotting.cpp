@@ -2764,7 +2764,8 @@ DearPyGui::set_configuration(PyObject* inDict, mvPlotConfig& outConfig)
 	flagop("crosshairs", ImPlotFlags_Crosshairs, outConfig._flags);
 	flagop("equal_aspects", ImPlotFlags_Equal, outConfig._flags);
 	flagop("no_inputs", ImPlotFlags_NoInputs, outConfig._flags);
-	flagop("no_frame", ImPlotFlags_NoFrame, outConfig._flags);	
+	flagop("no_frame", ImPlotFlags_NoFrame, outConfig._flags);
+	flagop("no_auto_fit", ImPlotFlags_NoAutoFit, outConfig._flags);
 	// flagop("canvas_only", ImPlotFlags_CanvasOnly, outConfig._flags);
 }
 
@@ -3439,6 +3440,7 @@ DearPyGui::fill_configuration_dict(const mvPlotConfig& inConfig, PyObject* outDi
 	checkbitset("equal_aspects", ImPlotFlags_Equal, inConfig._flags);
 	checkbitset("no_inputs", ImPlotFlags_NoInputs, inConfig._flags);
 	checkbitset("no_frame", ImPlotFlags_NoFrame, inConfig._flags);
+	checkbitset("no_auto_fit", ImPlotFlags_NoAutoFit, inConfig._flags);
 	// checkbitset("canvas_only", ImPlotFlags_CanvasOnly, inConfig._flags);
 }
 

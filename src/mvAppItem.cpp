@@ -2704,6 +2704,7 @@ DearPyGui::GetEntityParser(mvAppItemType type)
         args.push_back({ mvPyDataType::Bool, "equal_aspects", mvArgType::KEYWORD_ARG, "False", "primary x and y axes will be constrained to have the same units/pixel (does not apply to auxiliary y-axes)"});
         args.push_back({ mvPyDataType::Bool, "no_inputs", mvArgType::KEYWORD_ARG, "False", "the user will not be able to interact with the plot"});
         args.push_back({ mvPyDataType::Bool, "no_frame", mvArgType::KEYWORD_ARG, "False", "the ImGui frame will not be rendered"});
+        args.push_back({ mvPyDataType::Bool, "no_auto_fit", mvArgType::KEYWORD_ARG, "False", "the user will not be able to auto-fit by double clicking"});
         // args.push_back({ mvPyDataType::Bool, "canvas_only", mvArgType::KEYWORD_ARG, "False", "shortcut for: no_title + no_legend + no_menu + no_box_select + no_mouse_pos"});
         args.push_back({ mvPyDataType::Bool, "use_local_time", mvArgType::KEYWORD_ARG, "False", "axis labels will be formatted for your timezone when" });
         args.push_back({ mvPyDataType::Bool, "use_ISO8601", mvArgType::KEYWORD_ARG, "False", "dates will be formatted according to ISO 8601 where applicable (e.g. YYYY-MM-DD, YYYY-MM, --MM-DD, etc.)" });

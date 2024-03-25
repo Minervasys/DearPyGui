@@ -2196,6 +2196,7 @@ def plot(**kwargs):
 		equal_aspects (bool, optional): primary x and y axes will be constrained to have the same units/pixel (does not apply to auxiliary y-axes)
 		no_inputs (bool, optional): the user will not be able to interact with the plot
 		no_frame (bool, optional): the ImGui frame will not be rendered
+		no_auto_fit (bool, optional): the user will not be able to auto-fit by double clicking
 		use_local_time (bool, optional): axis labels will be formatted for your timezone when
 		use_ISO8601 (bool, optional): dates will be formatted according to ISO 8601 where applicable (e.g. YYYY-MM-DD, YYYY-MM, --MM-DD, etc.)
 		use_24hour_clock (bool, optional): times will be formatted using a 24 hour clock
@@ -5588,6 +5589,7 @@ def add_plot(**kwargs):
 		equal_aspects (bool, optional): primary x and y axes will be constrained to have the same units/pixel (does not apply to auxiliary y-axes)
 		no_inputs (bool, optional): the user will not be able to interact with the plot
 		no_frame (bool, optional): the ImGui frame will not be rendered
+		no_auto_fit (bool, optional): the user will not be able to auto-fit by double clicking
 		use_local_time (bool, optional): axis labels will be formatted for your timezone when
 		use_ISO8601 (bool, optional): dates will be formatted according to ISO 8601 where applicable (e.g. YYYY-MM-DD, YYYY-MM, --MM-DD, etc.)
 		use_24hour_clock (bool, optional): times will be formatted using a 24 hour clock
