@@ -712,6 +712,9 @@ DearPyGui::draw_plot_axis(ImDrawList* drawlist, mvAppItem& item, mvPlotAxisConfi
 
 	UpdateAppItemState(item.state);
 
+	// Override the result of `ImGui::IsItemHovered()` (in UpdateAppItemState) with the one from ImPlot
+	item.state.hovered = ImPlot::IsAxisHovered(config.axis);
+
 	if (item.font)
 		ImGui::PopFont();
 

@@ -275,6 +275,7 @@ CanItemTypeBeHovered(mvAppItemType type)
     case mvAppItemType::mvNodeEditor:
     case mvAppItemType::mvNodeLink:
     case mvAppItemType::mvPlot:
+    case mvAppItemType::mvPlotAxis:
     case mvAppItemType::mvTableColumn:
     case mvAppItemType::mvButton: return true;
     default: return false;
