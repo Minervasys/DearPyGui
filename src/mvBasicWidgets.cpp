@@ -4651,6 +4651,11 @@ DearPyGui::draw_input_text(ImDrawList* drawlist, mvAppItem& item, mvInputTextCon
 	//-----------------------------------------------------------------------------
 	UpdateAppItemState(item.state);
 
+	if (!item.config.enabled && item.state.hovered) {
+    	ImGuiContext& g = *GImGui;
+		g.MouseCursor = ImGuiMouseCursor_Arrow;
+	}
+
 	//-----------------------------------------------------------------------------
 	// post draw
 	//-----------------------------------------------------------------------------
