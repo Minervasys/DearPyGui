@@ -811,13 +811,11 @@ DearPyGui::draw_drag_line(ImDrawList* drawlist, mvAppItem& item, mvDragLineConfi
 			mvAddCallback(item.config.callback, item.uuid, nullptr, item.config.user_data);
 		}
 		if (config.show_label && !item.config.specifiedLabel.empty() && (hovered || held)) {
-            char buff[IMPLOT_LABEL_MAX_SIZE];
 			ImPlotContext& gp = *GImPlot;
 			ImPlotAxis& axis = gp.CurrentPlot->Axes[gp.CurrentPlot->CurrentX];
 			auto pos = *config.value.get();
-    		ImPlot::LabelAxisValue(axis, pos, buff, sizeof(buff), true);
 			ImVec4 color = ImPlot::IsColorAuto(config.color.toVec4()) ? ImGui::GetStyleColorVec4(ImGuiCol_Text) : config.color;
-			ImPlot::Annotation(pos, ImPlot::GetPlotLimits().Min().y, color, ImVec2(0, 0), true, "%s = %s", item.config.specifiedLabel.c_str(), buff);
+			ImPlot::Annotation(pos, ImPlot::GetPlotLimits().Min().y, color, ImVec2(0, 0), true, "%s", item.config.specifiedLabel.c_str());
 		}
 	}
 	else
