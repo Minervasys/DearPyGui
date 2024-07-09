@@ -36,12 +36,22 @@ DearPyGui::fill_configuration_dict(const mvButtonConfig& inConfig, PyObject* out
 	mvPyObject py_arrow = ToPyBool(inConfig.arrow);
 	mvPyObject py_direction = ToPyInt(inConfig.direction);
 	mvPyObject py_repeat = ToPyBool(inConfig.repeat);
-
+	mvPyObject py_shortcut = ToPyIntList(inConfig.shortcut.data(), (int)inConfig.shortcut.size());
 
 	PyDict_SetItemString(outDict, "small", py_small);
 	PyDict_SetItemString(outDict, "arrow", py_arrow);
 	PyDict_SetItemString(outDict, "direction", py_direction);
 	PyDict_SetItemString(outDict, "repeat", py_repeat);
+	PyDict_SetItemString(outDict, "shortcut", py_shortcut);
+
+	// helper to check and set bit
+	auto checkbitset = [outDict](const char* keyword, int flag, const int& flags)
+	{
+		PyDict_SetItemString(outDict, keyword, mvPyObject(ToPyBool(flags & flag)));
+	};
+
+	checkbitset("shortcut_global", ImGuiInputFlags_RouteGlobal, inConfig.flags_shortcut);
+	checkbitset("shortcut_always", ImGuiInputFlags_RouteAlways, inConfig.flags_shortcut);
 }
 
 void
@@ -627,7 +637,17 @@ DearPyGui::fill_configuration_dict(const mvMenuItemConfig& inConfig, PyObject* o
 		return;
 
 	PyDict_SetItemString(outDict, "shortcut", mvPyObject(ToPyString(inConfig.shortcut)));
+	PyDict_SetItemString(outDict, "shortcut_modifiers", mvPyObject(ToPyIntList(inConfig.shortcut_modifiers.data(), (int)inConfig.shortcut_modifiers.size())));
 	PyDict_SetItemString(outDict, "check", mvPyObject(ToPyBool(inConfig.check)));
+
+	// helper to check and set bit
+	auto checkbitset = [outDict](const char* keyword, int flag, const int& flags)
+	{
+		PyDict_SetItemString(outDict, keyword, mvPyObject(ToPyBool(flags & flag)));
+	};
+
+	checkbitset("shortcut_global", ImGuiInputFlags_RouteGlobal, inConfig.shortcut_flags);
+	checkbitset("shortcut_always", ImGuiInputFlags_RouteAlways, inConfig.shortcut_flags);
 }
 
 void
@@ -664,6 +684,16 @@ DearPyGui::fill_configuration_dict(const mvImageButtonConfig& inConfig, PyObject
 	PyDict_SetItemString(outDict, "background_color", mvPyObject(ToPyColor(inConfig.backgroundColor)));
 	PyDict_SetItemString(outDict, "texture_tag", mvPyObject(ToPyUUID(inConfig.textureUUID)));
 	PyDict_SetItemString(outDict, "frame_padding", mvPyObject(ToPyInt(inConfig.framePadding)));
+	PyDict_SetItemString(outDict, "shortcut", mvPyObject(ToPyIntList(inConfig.shortcut.data(), (int)inConfig.shortcut.size())));
+
+	// helper to check and set bit
+	auto checkbitset = [outDict](const char* keyword, int flag, const int& flags)
+	{
+		PyDict_SetItemString(outDict, keyword, mvPyObject(ToPyBool(flags & flag)));
+	};
+
+	checkbitset("shortcut_global", ImGuiInputFlags_RouteGlobal, inConfig.flags_shortcut);
+	checkbitset("shortcut_always", ImGuiInputFlags_RouteAlways, inConfig.flags_shortcut);
 }
 
 void
@@ -723,6 +753,16 @@ DearPyGui::set_configuration(PyObject* inDict, mvButtonConfig& outConfig)
 	if (PyObject* item = PyDict_GetItemString(inDict, "arrow")) outConfig.arrow = ToBool(item);
 	if (PyObject* item = PyDict_GetItemString(inDict, "direction")) outConfig.direction = static_cast<ImGuiDir>(ToInt(item));
 	if (PyObject* item = PyDict_GetItemString(inDict, "repeat")) outConfig.repeat = ToBool(item);
+	if (PyObject* item = PyDict_GetItemString(inDict, "shortcut")) outConfig.shortcut = ToIntVect(item);
+
+	// helper for bit flipping
+	auto flagop = [inDict](const char* keyword, int flag, int& flags)
+	{
+		if (PyObject* item = PyDict_GetItemString(inDict, keyword)) ToBool(item) ? flags |= flag : flags &= ~flag;
+	};
+
+	flagop("shortcut_global", ImGuiInputFlags_RouteGlobal, outConfig.flags_shortcut);
+	flagop("shortcut_always", ImGuiInputFlags_RouteAlways, outConfig.flags_shortcut);
 }
 
 void
@@ -1705,7 +1745,17 @@ DearPyGui::set_configuration(PyObject* inDict, mvMenuItemConfig& outConfig)
 		return;
 
 	if (PyObject* item = PyDict_GetItemString(inDict, "shortcut")) outConfig.shortcut = ToString(item);
+	if (PyObject* item = PyDict_GetItemString(inDict, "shortcut_modifiers")) outConfig.shortcut_modifiers = ToIntVect(item);
 	if (PyObject* item = PyDict_GetItemString(inDict, "check")) outConfig.check = ToBool(item);
+
+	// helper for bit flipping
+	auto flagop = [inDict](const char* keyword, int flag, int& flags)
+	{
+		if (PyObject* item = PyDict_GetItemString(inDict, keyword)) ToBool(item) ? flags |= flag : flags &= ~flag;
+	};
+
+	flagop("shortcut_global", ImGuiInputFlags_RouteGlobal, outConfig.shortcut_flags);
+	flagop("shortcut_always", ImGuiInputFlags_RouteAlways, outConfig.shortcut_flags);
 }
 
 void
@@ -1758,6 +1808,17 @@ DearPyGui::set_configuration(PyObject* inDict, mvImageButtonConfig& outConfig)
 	if (PyObject* item = PyDict_GetItemString(inDict, "tint_color")) outConfig.tintColor = ToColor(item);
 	if (PyObject* item = PyDict_GetItemString(inDict, "background_color")) outConfig.backgroundColor = ToColor(item);
 	if (PyObject* item = PyDict_GetItemString(inDict, "frame_padding")) outConfig.framePadding = ToInt(item);
+	if (PyObject* item = PyDict_GetItemString(inDict, "shortcut")) outConfig.shortcut = ToIntVect(item);
+
+	// helper for bit flipping
+	auto flagop = [inDict](const char* keyword, int flag, int& flags)
+	{
+		if (PyObject* item = PyDict_GetItemString(inDict, keyword)) ToBool(item) ? flags |= flag : flags &= ~flag;
+	};
+
+	flagop("shortcut_global", ImGuiInputFlags_RouteGlobal, outConfig.flags_shortcut);
+	flagop("shortcut_always", ImGuiInputFlags_RouteAlways, outConfig.flags_shortcut);
+
 	if (PyObject* item = PyDict_GetItemString(inDict, "texture_tag"))
 	{
 		outConfig.textureUUID = GetIDFromPyObject(item);
@@ -2756,6 +2817,13 @@ DearPyGui::draw_button(ImDrawList* drawlist, mvAppItem& item, const mvButtonConf
 
 		bool activated = false;
 
+		if (!config.shortcut.empty()) {
+			if (config.shortcut.size() == 1) {
+				ImGui::SetNextItemShortcut(config.shortcut[0], config.flags_shortcut);
+			} else if (config.shortcut.size() == 2) {
+				ImGui::SetNextItemShortcut(config.shortcut[0] | config.shortcut[1], config.flags_shortcut);
+			}
+		}
 		if (config.small_button)
 			activated = ImGui::SmallButton(item.info.internalLabel.c_str());
 
@@ -5954,6 +6022,13 @@ DearPyGui::draw_menu_item(ImDrawList* drawlist, mvAppItem& item, mvMenuItemConfi
 		// constants.
 		ImGui::PushStyleColor(ImGuiCol_TextDisabled, ImGui::GetStyleColorVec4(ImGuiCol_Text));
 
+		if (!config.shortcut_modifiers.empty()) {
+			if (config.shortcut_modifiers.size() == 1) {
+				ImGui::SetNextItemShortcut(config.shortcut_modifiers[0], config.shortcut_flags);
+			} else if (config.shortcut_modifiers.size() == 2) {
+				ImGui::SetNextItemShortcut(config.shortcut_modifiers[0] | config.shortcut_modifiers[1], config.shortcut_flags);
+			}
+		}
 		// create menu item and see if its selected
 		if (ImGui::MenuItem(item.info.internalLabel.c_str(), config.shortcut.c_str(), config.check ? config.value.get() : nullptr, item.config.enabled))
 		{
@@ -6277,6 +6352,14 @@ DearPyGui::draw_image_button(ImDrawList* drawlist, mvAppItem& item, mvImageButto
 			if (config.framePadding >= 0)
         		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2((float)config.framePadding, (float)config.framePadding));
 			
+
+			if (!config.shortcut.empty()) {
+				if (config.shortcut.size() == 1) {
+					ImGui::SetNextItemShortcut(config.shortcut[0], config.flags_shortcut);
+				} else if (config.shortcut.size() == 2) {
+					ImGui::SetNextItemShortcut(config.shortcut[0] | config.shortcut[1], config.flags_shortcut);
+				}
+			}
 			ImGui::PushID(item.uuid);
 			if (ImGui::ImageButton(item.info.internalLabel.c_str(), texture, ImVec2((float)item.config.width, (float)item.config.height),
 				ImVec2(config.uv_min.x, config.uv_min.y), ImVec2(config.uv_max.x, config.uv_max.y),

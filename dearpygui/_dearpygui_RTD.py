@@ -3003,6 +3003,9 @@ def add_button(**kwargs):
 		arrow (bool, optional): Displays an arrow in place of the text string. This requires the direction keyword.
 		direction (int, optional): Sets the cardinal direction for the arrow by using constants mvDir_Left, mvDir_Up, mvDir_Down, mvDir_Right, mvDir_None. Arrow keyword must be set to True.
 		repeat (bool, optional): Hold to continuosly repeat the click.
+		shortcut (Union[List[int], Tuple[int, ...]], optional): Shortcut keys.
+		shortcut_global (bool, optional): Shortcut will be usable even if it's not in the route stack
+		shortcut_always (bool, optional): Shortcut will be always usable
 		id (Union[int, str], optional): (deprecated)
 	Returns:
 		Union[int, str]
@@ -4430,6 +4433,9 @@ def add_image_button(texture_tag, **kwargs):
 		background_color (Union[List[float], Tuple[float, ...]], optional): Displays a border of the specified color around the texture.
 		uv_min (Union[List[float], Tuple[float, ...]], optional): Normalized texture coordinates min point.
 		uv_max (Union[List[float], Tuple[float, ...]], optional): Normalized texture coordinates max point.
+		shortcut (Union[List[int], Tuple[int, ...]], optional): Shortcut keys.
+		shortcut_global (bool, optional): Shortcut will be usable even if it's not in the route stack
+		shortcut_always (bool, optional): Shortcut will be always usable
 		id (Union[int, str], optional): (deprecated)
 		frame_padding (int, optional): (deprecated)Empty space around the outside of the texture. Button will show around the texture.
 	Returns:
@@ -5285,6 +5291,9 @@ def add_menu_item(**kwargs):
 		track_offset (float, optional): 0.0f:top, 0.5f:center, 1.0f:bottom
 		default_value (bool, optional): This value also controls the checkmark when shown.
 		shortcut (str, optional): Displays text on the menu item. Typically used to show a shortcut key command.
+		shortcut_modifiers (Union[List[int], Tuple[int, ...]], optional): Actual shortcut keys.
+		shortcut_global (bool, optional): Shortcut will be usable even if it's not in the route stack
+		shortcut_always (bool, optional): Shortcut will be always usable
 		check (bool, optional): Displays a checkmark on the menu item when it is selected and placed in a menu.
 		id (Union[int, str], optional): (deprecated)
 		drag_callback (Callable, optional): (deprecated)

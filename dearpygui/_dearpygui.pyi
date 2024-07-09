@@ -38,7 +38,7 @@ def add_bool_value(*, label: str ='', user_data: Any ='', use_internal_label: bo
 	"""Adds a bool value."""
 	...
 
-def add_button(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', width: int ='', height: int ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', payload_type: str ='', callback: Callable ='', drag_callback: Callable ='', drop_callback: Callable ='', show: bool ='', enabled: bool ='', pos: Union[List[int], Tuple[int, ...]] ='', filter_key: str ='', tracked: bool ='', track_offset: float ='', small: bool ='', arrow: bool ='', direction: int ='', repeat: bool ='') -> Union[int, str]:
+def add_button(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', width: int ='', height: int ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', payload_type: str ='', callback: Callable ='', drag_callback: Callable ='', drop_callback: Callable ='', show: bool ='', enabled: bool ='', pos: Union[List[int], Tuple[int, ...]] ='', filter_key: str ='', tracked: bool ='', track_offset: float ='', small: bool ='', arrow: bool ='', direction: int ='', repeat: bool ='', shortcut: Union[List[int], Tuple[int, ...]] ='', shortcut_global: bool ='', shortcut_always: bool ='') -> Union[int, str]:
 	"""Adds a button."""
 	...
 
@@ -251,7 +251,7 @@ def add_image(texture_tag : Union[int, str], *, label: str ='', user_data: Any =
 	"""Adds an image from a specified texture. uv_min and uv_max represent the normalized texture coordinates of the original image that will be shown. Using range (0.0,0.0)->(1.0,1.0) for texture coordinates will generally display the entire texture."""
 	...
 
-def add_image_button(texture_tag : Union[int, str], *, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', width: int ='', height: int ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', source: Union[int, str] ='', payload_type: str ='', callback: Callable ='', drag_callback: Callable ='', drop_callback: Callable ='', show: bool ='', enabled: bool ='', pos: Union[List[int], Tuple[int, ...]] ='', filter_key: str ='', tracked: bool ='', track_offset: float ='', tint_color: Union[List[float], Tuple[float, ...]] ='', background_color: Union[List[float], Tuple[float, ...]] ='', uv_min: Union[List[float], Tuple[float, ...]] ='', uv_max: Union[List[float], Tuple[float, ...]] ='') -> Union[int, str]:
+def add_image_button(texture_tag : Union[int, str], *, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', width: int ='', height: int ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', source: Union[int, str] ='', payload_type: str ='', callback: Callable ='', drag_callback: Callable ='', drop_callback: Callable ='', show: bool ='', enabled: bool ='', pos: Union[List[int], Tuple[int, ...]] ='', filter_key: str ='', tracked: bool ='', track_offset: float ='', tint_color: Union[List[float], Tuple[float, ...]] ='', background_color: Union[List[float], Tuple[float, ...]] ='', uv_min: Union[List[float], Tuple[float, ...]] ='', uv_max: Union[List[float], Tuple[float, ...]] ='', shortcut: Union[List[int], Tuple[int, ...]] ='', shortcut_global: bool ='', shortcut_always: bool ='') -> Union[int, str]:
 	"""Adds an button with a texture. uv_min and uv_max represent the normalized texture coordinates of the original image that will be shown. Using range (0.0,0.0)->(1.0,1.0) texture coordinates will generally display the entire texture"""
 	...
 
@@ -387,7 +387,7 @@ def add_menu_bar(*, label: str ='', user_data: Any ='', use_internal_label: bool
 	"""Adds a menu bar to a window."""
 	...
 
-def add_menu_item(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', payload_type: str ='', callback: Callable ='', drop_callback: Callable ='', show: bool ='', enabled: bool ='', filter_key: str ='', tracked: bool ='', track_offset: float ='', default_value: bool ='', shortcut: str ='', check: bool ='') -> Union[int, str]:
+def add_menu_item(*, label: str ='', user_data: Any ='', use_internal_label: bool ='', tag: Union[int, str] ='', indent: int ='', parent: Union[int, str] ='', before: Union[int, str] ='', payload_type: str ='', callback: Callable ='', drop_callback: Callable ='', show: bool ='', enabled: bool ='', filter_key: str ='', tracked: bool ='', track_offset: float ='', default_value: bool ='', shortcut: str ='', shortcut_modifiers: Union[List[int], Tuple[int, ...]] ='', shortcut_global: bool ='', shortcut_always: bool ='', check: bool ='') -> Union[int, str]:
 	"""Adds a menu item to an existing menu. Menu items act similar to selectables and has a bool value. When placed in a menu the checkmark will reflect its value."""
 	...
 

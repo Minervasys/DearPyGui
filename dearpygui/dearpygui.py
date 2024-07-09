@@ -3198,7 +3198,7 @@ def add_bool_value(*, label: str =None, user_data: Any =None, use_internal_label
 
 	return internal_dpg.add_bool_value(label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, source=source, default_value=default_value, parent=parent, **kwargs)
 
-def add_button(*, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, width: int =0, height: int =0, indent: int =-1, parent: Union[int, str] =0, before: Union[int, str] =0, payload_type: str ='$$DPG_PAYLOAD', callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: Union[List[int], Tuple[int, ...]] =[], filter_key: str ='', tracked: bool =False, track_offset: float =0.5, small: bool =False, arrow: bool =False, direction: int =0, repeat: bool =False, **kwargs) -> Union[int, str]:
+def add_button(*, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, width: int =0, height: int =0, indent: int =-1, parent: Union[int, str] =0, before: Union[int, str] =0, payload_type: str ='$$DPG_PAYLOAD', callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: Union[List[int], Tuple[int, ...]] =[], filter_key: str ='', tracked: bool =False, track_offset: float =0.5, small: bool =False, arrow: bool =False, direction: int =0, repeat: bool =False, shortcut: Union[List[int], Tuple[int, ...]] =[], shortcut_global: bool =False, shortcut_always: bool =False, **kwargs) -> Union[int, str]:
 	"""	 Adds a button.
 
 	Args:
@@ -3225,6 +3225,9 @@ def add_button(*, label: str =None, user_data: Any =None, use_internal_label: bo
 		arrow (bool, optional): Displays an arrow in place of the text string. This requires the direction keyword.
 		direction (int, optional): Sets the cardinal direction for the arrow by using constants mvDir_Left, mvDir_Up, mvDir_Down, mvDir_Right, mvDir_None. Arrow keyword must be set to True.
 		repeat (bool, optional): Hold to continuosly repeat the click.
+		shortcut (Union[List[int], Tuple[int, ...]], optional): Shortcut keys.
+		shortcut_global (bool, optional): Shortcut will be usable even if it's not in the route stack
+		shortcut_always (bool, optional): Shortcut will be always usable
 		id (Union[int, str], optional): (deprecated) 
 	Returns:
 		Union[int, str]
@@ -3234,7 +3237,7 @@ def add_button(*, label: str =None, user_data: Any =None, use_internal_label: bo
 		warnings.warn('id keyword renamed to tag', DeprecationWarning, 2)
 		tag=kwargs['id']
 
-	return internal_dpg.add_button(label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, width=width, height=height, indent=indent, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, enabled=enabled, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, small=small, arrow=arrow, direction=direction, repeat=repeat, **kwargs)
+	return internal_dpg.add_button(label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, width=width, height=height, indent=indent, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, enabled=enabled, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, small=small, arrow=arrow, direction=direction, repeat=repeat, shortcut=shortcut, shortcut_global=shortcut_global, shortcut_always=shortcut_always, **kwargs)
 
 def add_candle_series(dates : Union[List[float], Tuple[float, ...]], opens : Union[List[float], Tuple[float, ...]], closes : Union[List[float], Tuple[float, ...]], lows : Union[List[float], Tuple[float, ...]], highs : Union[List[float], Tuple[float, ...]], *, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, parent: Union[int, str] =0, before: Union[int, str] =0, source: Union[int, str] =0, show: bool =True, bull_color: Union[List[int], Tuple[int, ...]] =(0, 255, 113, 255), bear_color: Union[List[int], Tuple[int, ...]] =(218, 13, 79, 255), weight: float =0.25, tooltip: bool =True, time_unit: int =5, **kwargs) -> Union[int, str]:
 	"""	 Adds a candle series to a plot.
@@ -4857,7 +4860,7 @@ def add_image(texture_tag : Union[int, str], *, label: str =None, user_data: Any
 
 	return internal_dpg.add_image(texture_tag, label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, width=width, height=height, indent=indent, parent=parent, before=before, source=source, payload_type=payload_type, drag_callback=drag_callback, drop_callback=drop_callback, show=show, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, tint_color=tint_color, border_color=border_color, uv_min=uv_min, uv_max=uv_max, **kwargs)
 
-def add_image_button(texture_tag : Union[int, str], *, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, width: int =0, height: int =0, indent: int =-1, parent: Union[int, str] =0, before: Union[int, str] =0, source: Union[int, str] =0, payload_type: str ='$$DPG_PAYLOAD', callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: Union[List[int], Tuple[int, ...]] =[], filter_key: str ='', tracked: bool =False, track_offset: float =0.5, tint_color: Union[List[float], Tuple[float, ...]] =(255, 255, 255, 255), background_color: Union[List[float], Tuple[float, ...]] =(0, 0, 0, 0), uv_min: Union[List[float], Tuple[float, ...]] =(0.0, 0.0), uv_max: Union[List[float], Tuple[float, ...]] =(1.0, 1.0), **kwargs) -> Union[int, str]:
+def add_image_button(texture_tag : Union[int, str], *, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, width: int =0, height: int =0, indent: int =-1, parent: Union[int, str] =0, before: Union[int, str] =0, source: Union[int, str] =0, payload_type: str ='$$DPG_PAYLOAD', callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: Union[List[int], Tuple[int, ...]] =[], filter_key: str ='', tracked: bool =False, track_offset: float =0.5, tint_color: Union[List[float], Tuple[float, ...]] =(255, 255, 255, 255), background_color: Union[List[float], Tuple[float, ...]] =(0, 0, 0, 0), uv_min: Union[List[float], Tuple[float, ...]] =(0.0, 0.0), uv_max: Union[List[float], Tuple[float, ...]] =(1.0, 1.0), shortcut: Union[List[int], Tuple[int, ...]] =[], shortcut_global: bool =False, shortcut_always: bool =False, **kwargs) -> Union[int, str]:
 	"""	 Adds an button with a texture. uv_min and uv_max represent the normalized texture coordinates of the original image that will be shown. Using range (0.0,0.0)->(1.0,1.0) texture coordinates will generally display the entire texture
 
 	Args:
@@ -4886,6 +4889,9 @@ def add_image_button(texture_tag : Union[int, str], *, label: str =None, user_da
 		background_color (Union[List[float], Tuple[float, ...]], optional): Displays a border of the specified color around the texture.
 		uv_min (Union[List[float], Tuple[float, ...]], optional): Normalized texture coordinates min point.
 		uv_max (Union[List[float], Tuple[float, ...]], optional): Normalized texture coordinates max point.
+		shortcut (Union[List[int], Tuple[int, ...]], optional): Shortcut keys.
+		shortcut_global (bool, optional): Shortcut will be usable even if it's not in the route stack
+		shortcut_always (bool, optional): Shortcut will be always usable
 		id (Union[int, str], optional): (deprecated) 
 		frame_padding (int, optional): (deprecated) Empty space around the outside of the texture. Button will show around the texture.
 	Returns:
@@ -4899,7 +4905,7 @@ def add_image_button(texture_tag : Union[int, str], *, label: str =None, user_da
 	if 'frame_padding' in kwargs.keys():
 		warnings.warn('frame_padding keyword deprecated. This is not supported anymore by ImGui but still used here as deprecated.', DeprecationWarning, 2)
 
-	return internal_dpg.add_image_button(texture_tag, label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, width=width, height=height, indent=indent, parent=parent, before=before, source=source, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, enabled=enabled, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, tint_color=tint_color, background_color=background_color, uv_min=uv_min, uv_max=uv_max, **kwargs)
+	return internal_dpg.add_image_button(texture_tag, label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, width=width, height=height, indent=indent, parent=parent, before=before, source=source, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, enabled=enabled, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, tint_color=tint_color, background_color=background_color, uv_min=uv_min, uv_max=uv_max, shortcut=shortcut, shortcut_global=shortcut_global, shortcut_always=shortcut_always, **kwargs)
 
 def add_image_series(texture_tag : Union[int, str], bounds_min : Union[List[float], Tuple[float, ...]], bounds_max : Union[List[float], Tuple[float, ...]], *, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, parent: Union[int, str] =0, before: Union[int, str] =0, source: Union[int, str] =0, show: bool =True, uv_min: Union[List[float], Tuple[float, ...]] =(0.0, 0.0), uv_max: Union[List[float], Tuple[float, ...]] =(1.0, 1.0), tint_color: Union[List[int], Tuple[int, ...]] =(255, 255, 255, 255), **kwargs) -> Union[int, str]:
 	"""	 Adds an image series to a plot.
@@ -5859,7 +5865,7 @@ def add_menu_bar(*, label: str =None, user_data: Any =None, use_internal_label: 
 
 	return internal_dpg.add_menu_bar(label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, indent=indent, parent=parent, show=show, delay_search=delay_search, **kwargs)
 
-def add_menu_item(*, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, indent: int =-1, parent: Union[int, str] =0, before: Union[int, str] =0, payload_type: str ='$$DPG_PAYLOAD', callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, filter_key: str ='', tracked: bool =False, track_offset: float =0.5, default_value: bool =False, shortcut: str ='', check: bool =False, **kwargs) -> Union[int, str]:
+def add_menu_item(*, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, indent: int =-1, parent: Union[int, str] =0, before: Union[int, str] =0, payload_type: str ='$$DPG_PAYLOAD', callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, filter_key: str ='', tracked: bool =False, track_offset: float =0.5, default_value: bool =False, shortcut: str ='', shortcut_modifiers: Union[List[int], Tuple[int, ...]] =[], shortcut_global: bool =False, shortcut_always: bool =False, check: bool =False, **kwargs) -> Union[int, str]:
 	"""	 Adds a menu item to an existing menu. Menu items act similar to selectables and has a bool value. When placed in a menu the checkmark will reflect its value.
 
 	Args:
@@ -5880,6 +5886,9 @@ def add_menu_item(*, label: str =None, user_data: Any =None, use_internal_label:
 		track_offset (float, optional): 0.0f:top, 0.5f:center, 1.0f:bottom
 		default_value (bool, optional): This value also controls the checkmark when shown.
 		shortcut (str, optional): Displays text on the menu item. Typically used to show a shortcut key command.
+		shortcut_modifiers (Union[List[int], Tuple[int, ...]], optional): Actual shortcut keys.
+		shortcut_global (bool, optional): Shortcut will be usable even if it's not in the route stack
+		shortcut_always (bool, optional): Shortcut will be always usable
 		check (bool, optional): Displays a checkmark on the menu item when it is selected and placed in a menu.
 		id (Union[int, str], optional): (deprecated) 
 		drag_callback (Callable, optional): (deprecated) 
@@ -5897,7 +5906,7 @@ def add_menu_item(*, label: str =None, user_data: Any =None, use_internal_label:
 
 		kwargs.pop('drag_callback', None)
 
-	return internal_dpg.add_menu_item(label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, indent=indent, parent=parent, before=before, payload_type=payload_type, callback=callback, drop_callback=drop_callback, show=show, enabled=enabled, filter_key=filter_key, tracked=tracked, track_offset=track_offset, default_value=default_value, shortcut=shortcut, check=check, **kwargs)
+	return internal_dpg.add_menu_item(label=label, user_data=user_data, use_internal_label=use_internal_label, tag=tag, indent=indent, parent=parent, before=before, payload_type=payload_type, callback=callback, drop_callback=drop_callback, show=show, enabled=enabled, filter_key=filter_key, tracked=tracked, track_offset=track_offset, default_value=default_value, shortcut=shortcut, shortcut_modifiers=shortcut_modifiers, shortcut_global=shortcut_global, shortcut_always=shortcut_always, check=check, **kwargs)
 
 def add_mouse_click_handler(button : int =-1, *, label: str =None, user_data: Any =None, use_internal_label: bool =True, tag: Union[int, str] =0, callback: Callable =None, show: bool =True, parent: Union[int, str] =internal_dpg.mvReservedUUID_1, **kwargs) -> Union[int, str]:
 	"""	 Adds a mouse click handler.

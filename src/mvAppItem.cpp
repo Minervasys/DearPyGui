@@ -1795,6 +1795,9 @@ DearPyGui::GetEntityParser(mvAppItemType type)
         args.push_back({ mvPyDataType::Bool, "arrow", mvArgType::KEYWORD_ARG, "False", "Displays an arrow in place of the text string. This requires the direction keyword." });
         args.push_back({ mvPyDataType::Integer, "direction", mvArgType::KEYWORD_ARG, "0", "Sets the cardinal direction for the arrow by using constants mvDir_Left, mvDir_Up, mvDir_Down, mvDir_Right, mvDir_None. Arrow keyword must be set to True." });
         args.push_back({ mvPyDataType::Bool, "repeat", mvArgType::KEYWORD_ARG, "False", "Hold to continuosly repeat the click." });
+        args.push_back({ mvPyDataType::IntList, "shortcut", mvArgType::KEYWORD_ARG, "[]", "Shortcut keys." });
+        args.push_back({ mvPyDataType::Bool, "shortcut_global", mvArgType::KEYWORD_ARG, "False", "Shortcut will be usable even if it's not in the route stack" });
+        args.push_back({ mvPyDataType::Bool, "shortcut_always", mvArgType::KEYWORD_ARG, "False", "Shortcut will be always usable" });
 
         setup.about = "Adds a button.";
         break;
@@ -2071,6 +2074,9 @@ DearPyGui::GetEntityParser(mvAppItemType type)
         args.push_back({ mvPyDataType::Callable, "drag_callback", mvArgType::DEPRECATED_REMOVE_KEYWORD_ARG });
         args.push_back({ mvPyDataType::Bool, "default_value", mvArgType::KEYWORD_ARG, "False", "This value also controls the checkmark when shown." });
         args.push_back({ mvPyDataType::String, "shortcut", mvArgType::KEYWORD_ARG, "''", "Displays text on the menu item. Typically used to show a shortcut key command." });
+        args.push_back({ mvPyDataType::IntList, "shortcut_modifiers", mvArgType::KEYWORD_ARG, "[]", "Actual shortcut keys." });
+        args.push_back({ mvPyDataType::Bool, "shortcut_global", mvArgType::KEYWORD_ARG, "False", "Shortcut will be usable even if it's not in the route stack" });
+        args.push_back({ mvPyDataType::Bool, "shortcut_always", mvArgType::KEYWORD_ARG, "False", "Shortcut will be always usable" });
         args.push_back({ mvPyDataType::Bool, "check", mvArgType::KEYWORD_ARG, "False", "Displays a checkmark on the menu item when it is selected and placed in a menu." });
 
         setup.about = "Adds a menu item to an existing menu. Menu items act similar to selectables and has a bool value. When placed in a menu the checkmark will reflect its value.";
@@ -2955,6 +2961,9 @@ DearPyGui::GetEntityParser(mvAppItemType type)
         args.push_back({ mvPyDataType::FloatList, "background_color", mvArgType::KEYWORD_ARG, "(0, 0, 0, 0)", "Displays a border of the specified color around the texture." });
         args.push_back({ mvPyDataType::FloatList, "uv_min", mvArgType::KEYWORD_ARG, "(0.0, 0.0)", "Normalized texture coordinates min point." });
         args.push_back({ mvPyDataType::FloatList, "uv_max", mvArgType::KEYWORD_ARG, "(1.0, 1.0)", "Normalized texture coordinates max point." });
+        args.push_back({ mvPyDataType::IntList, "shortcut", mvArgType::KEYWORD_ARG, "[]", "Shortcut keys." });
+        args.push_back({ mvPyDataType::Bool, "shortcut_global", mvArgType::KEYWORD_ARG, "False", "Shortcut will be usable even if it's not in the route stack" });
+        args.push_back({ mvPyDataType::Bool, "shortcut_always", mvArgType::KEYWORD_ARG, "False", "Shortcut will be always usable" });
 
         setup.about = "Adds an button with a texture. uv_min and uv_max represent the normalized texture coordinates of the original image that will be shown. Using range (0.0,0.0)->(1.0,1.0) texture coordinates will generally display the entire texture";
         setup.category = { "Widgets", "Textures" };

@@ -219,6 +219,8 @@ struct mvSimplePlotConfig
 struct mvButtonConfig
 {
     ImGuiDir direction = ImGuiDir_Up;
+    std::vector<int> shortcut;
+    ImGuiInputFlags flags_shortcut = ImGuiInputFlags_None;
     bool     small_button = false;
     bool     arrow = false;
     bool     repeat = false;
@@ -535,6 +537,8 @@ struct mvTabButtonConfig
 struct mvMenuItemConfig
 {
     std::string shortcut;
+    std::vector<int> shortcut_modifiers;
+    ImGuiInputFlags shortcut_flags = ImGuiInputFlags_None;
     bool        check = false;
     std::shared_ptr<bool> value = std::make_shared<bool>(false);
     bool        disabled_value = false;
@@ -570,6 +574,8 @@ struct mvImageButtonConfig
     mvColor                    backgroundColor = { 0.0f, 0.0f, 0.0f, 0.0f };
     int                        framePadding = -1;
     bool                       _internalTexture = false; // create a local texture if necessary
+    std::vector<int>           shortcut;
+    ImGuiInputFlags            flags_shortcut = ImGuiInputFlags_None;
 };
 
 struct mvFilterSetConfig
