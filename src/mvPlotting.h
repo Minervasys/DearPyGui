@@ -388,6 +388,12 @@ struct mvSubPlotsConfig
 
 struct mvPlotAxisConfig
 {
+    struct ImVecDouble2
+    {
+        double x;
+        double y;
+    };
+
     ImPlotAxisFlags          flags = ImPlotAxisFlags_None;
     ImAxis                   axis = ImAxis_X1;
     bool                     setLimits = false;
@@ -395,9 +401,9 @@ struct mvPlotAxisConfig
     bool                     setZoomRange = false;
     ImPlotScale              scale = ImPlotScale_Linear;
     std::string              formatter;
-    ImVec2                   limits;
-    ImVec2                   limits_actual;
-    ImVec2                   constraints_range;
+    ImPlotRange              limits;
+    ImPlotRange              limits_actual;
+    ImPlotRange              constraints_range;
     ImVec2                   zoom_range;
     std::vector<std::string> labels;
     std::vector<double>      labelLocations;
