@@ -1,0 +1,27 @@
+default:
+  tags:
+    - minerva-build
+
+stages:
+  - build
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SUBMODULE_FORCE_HTTPS: "true"
+  GIT_SUBMODULE_DEPTH: 1
+
+build:
+  stage: build
+  image: ubuntu:22.04
+  script:
+    - apt update
+    - apt install --yes python3 python3-venv libpython3-dev cmake xorg-dev libglu1-mesa-dev libgl1-mesa-dev libxrandr-dev build-essential curl
+    - python3 -m venv venv
+    - venv/bin/pip install setuptools wheel twine
+    - venv/bin/python -m setup bdist_wheel --plat-name manylinux1_x86_64 --dist-dir dist
+    - 'response=$(curl --header "JOB-TOKEN: $CI_JOB_TOKEN" "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages")'
+    - package_id=$(echo "$response" | grep -o '"id":[0-9]*' | head -n 1 | cut -d ':' -f 2)
+    - package_id=$(echo $package_id | tr -d '"')
+    - export PACKAGE_ID=$package_id
+    - 'curl --request DELETE --header "JOB-TOKEN: $CI_JOB_TOKEN" "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages/$PACKAGE_ID"'
+    - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token venv/bin/python -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
