@@ -18,6 +18,10 @@ build:
     - venv/bin/pip install setuptools wheel twine
     - venv/bin/python -m setup bdist_wheel --plat-name manylinux1_x86_64 --dist-dir dist
     - |
-      DELETE_PATH=$(curl --silent --header "JOB-TOKEN: $CI_JOB_TOKEN" "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages?package_name=dearpygui" | jq ".[0]._links.delete_api_path")
-      curl --request DELETE --header "JOB-TOKEN: $CI_JOB_TOKEN" ${DELETE_PATH//\"/}
+      VERSION=$(venv/bin/python setup.py --version)
+      RESPONSE=$(curl --silent --header "JOB-TOKEN: $CI_JOB_TOKEN" "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages?package_version=$VERSION")
+      if [[ "$RESPONSE" != "[]" ]]; then
+        DELETE_PATH=$(echo $RESPONSE | jq ".[0]._links.delete_api_path")
+        curl --silent --request DELETE --header "JOB-TOKEN: $CI_JOB_TOKEN" ${DELETE_PATH//\"/}
+      fi
     - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token venv/bin/python -m twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
